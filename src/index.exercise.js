@@ -1,30 +1,34 @@
+import '@reach/dialog/styles.css'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
+import {Dialog} from '@reach/dialog'
 import {Logo} from './components/logo'
 
 function App() {
+  const [openModal, setOpenModal] = React.useState('none')
+
   return (
     <div>
       <Logo width="80" height="80" />
       <h1>Bookshelf</h1>
       <div>
-        <button
-          onClick={() => {
-            alert('Login clicked')
-          }}
-        >
-          Login
-        </button>
+        <button onClick={() => setOpenModal('login')}>Login</button>
       </div>
       <div>
-        <button
-          onClick={() => {
-            alert('Register clicked')
-          }}
-        >
-          Register
-        </button>
+        <button onClick={() => setOpenModal('register')}>Register</button>
       </div>
+      <Dialog arial-label="Login form" isOpen={openModal === 'login'}>
+        <div>
+          <button onClick={() => setOpenModal('none')}>Close</button>
+        </div>
+        <h3>Login</h3>
+      </Dialog>
+      <Dialog arial-label="Registration form" isOpen={openModal === 'register'}>
+        <div>
+          <button onClick={() => setOpenModal('none')}>Close</button>
+        </div>
+        <h3>Register</h3>
+      </Dialog>
     </div>
   )
 }
